@@ -1,10 +1,5 @@
 #Winged Boots GUI manager, by DaBoaz
-<<<<<<< HEAD
-#Version 0.15
-=======
-#Version 0.14
-# -*- coding: utf-8 -*-
->>>>>>> b6d0cc3ab53f6320791d9851c38e89c35f3a91ff
+#Version 0.16
 
 from tkinter import *
 

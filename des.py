@@ -1,10 +1,5 @@
 #Winged Boots DES encryptor/decryptor, by DaBoaz
-<<<<<<< HEAD
-#Version 0.15
-=======
-#Version 0.14
-# -*- coding: utf-8 -*-
->>>>>>> b6d0cc3ab53f6320791d9851c38e89c35f3a91ff
+#Version 0.16
 
 class DES():
 	def __init__(self):
@@ -28,14 +23,9 @@ class DES():
 		reip = self.IPing(msg, r = True)
 		return reip
 		
-<<<<<<< HEAD
 	def encrypt(self, msg): #msg in string
 		#encrypts string of any size
 		msg = self.strToHex(msg)
-=======
-	def encrypt(self, msg): #msg in hex
-		#encrypts hex string of any size
->>>>>>> b6d0cc3ab53f6320791d9851c38e89c35f3a91ff
 		keys = self.keys 
 		while len(msg)%16!=0: msg = '0' + msg
 		m = self.hexToBin(msg) #msg is in hex
@@ -47,16 +37,6 @@ class DES():
 		encrypted = self.binToHex(encrypted)
 		return encrypted #return in hex
 		
-<<<<<<< HEAD
-=======
-	def encryptEncodedStr(self, msg):#msg in bytes string
-		msg = msg.decode()
-		msg = self.strToHex(msg)
-		encrypted = self.encrypt(msg)
-		encrypted = encrypted.encode()
-		return encrypted #encoded hex (byte string hex)
-		
->>>>>>> b6d0cc3ab53f6320791d9851c38e89c35f3a91ff
 	def decrypt(self, cipher): #cipher in hex must be divisable by 16
 		cipher = self.hexToBin(cipher)
 		if len(cipher)%64 != 0: return "non DES Encrypted text"
@@ -67,20 +47,8 @@ class DES():
 			cipher = cipher[64:]
 		plain += self.encryptBlock(cipher, revK)
 		plain = self.binToHex(plain)
-<<<<<<< HEAD
 		plain = self.clean(plain) #removes the zeros in the begining
 		return self.hexToStr(plain) #return in string
-=======
-		return plain #return in hex
-		
-	def decryptEncodedStr(self, cipher): #cipher in bytes string hex
-		cipher = cipher.decode()
-		plain = self.decrypt(cipher)
-		plain = self.clean(plain)
-		plain = self.hexToStr(plain)
-		plain = plain.encode()
-		return plain #return in encoded hex (bytes string hex)
->>>>>>> b6d0cc3ab53f6320791d9851c38e89c35f3a91ff
 		
 	def setKeys(self, k): #k in hex
 		#set keys for decryption and encryption
@@ -281,27 +249,17 @@ class DES():
 			46, 42, 50, 36, 29, 32]
 		k = self.tabeling(pc2, bits)
 		return k
-<<<<<<< HEAD
-	
+		
+	#few encoding methods:
 	def semiEncode(self, str):
 		return [ord(i) for i in str]
-	
-	#few encoding methods:	
+		
 	def hexToBin(self, hex):
 		bn = bin(int(hex, 16))[2:].zfill(len(hex)*4)
-=======
-		
-	#few encoding methods:	
-	def hexToBin(self, hex):
-		bn = bin(int(hex, 16))[2:]
-		while len(bn) != (len(hex)*4):
-			bn = '0' + bn
->>>>>>> b6d0cc3ab53f6320791d9851c38e89c35f3a91ff
 		return bn
 		
 	def binToHex(self, bin):
 		hx = ''
-<<<<<<< HEAD
 		for i in range(0, len(bin), 4):	
 			hx += hex(int(bin[i:i+4], 2))[2:]
 		return hx
@@ -312,22 +270,10 @@ class DES():
 		for i in str:
 			hx += hex(i)[2:].zfill(3)
 		print(hx)
-=======
-		for i in range(0, int(len(bin)/4)):	
-			hx += hex(int(bin[i*4:(i*4)+4], 2))[2:]
-		return hx
-		
-	def strToHex(self, str):
-		hx = ''
-		if type(str) != type(b''): str = str.encode()
-		for i in str:
-			hx += hex(i)[2:]
->>>>>>> b6d0cc3ab53f6320791d9851c38e89c35f3a91ff
 		return hx
 	
 	def hexToStr(self, hx):
 		st = ''
-<<<<<<< HEAD
 		for i in range(0, len(hx), 3):
 			st += chr(int(hx[i:i+3], 16))
 		return st
@@ -399,22 +345,3 @@ if __name__ == "__main__":
 	c = tdes.decrypt(b)
 	print(c)
 	print(c == a)
-=======
-		for i in range(0, len(hx), 2):
-			st += chr(int(hx[i:i+2], 16))
-		return st
-		
-	def clean(self, bin): #can be bin or hex
-		while bin[0] == '0': bin = bin[1:]
-		return bin
-
-if __name__ == "__main__":
-	des = DES()
-	a = 'pizza'
-	print(des.strToHex(a))
-	des.setKeys('ab78000a999c876a')
-	c = '8374abc89283a902'
-	d = des.encrypt(c)
-	e = des.decrypt(d)
-	print(e == c, e, d, c)
->>>>>>> b6d0cc3ab53f6320791d9851c38e89c35f3a91ff
